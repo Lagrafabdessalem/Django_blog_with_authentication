@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+
+{% block Title %}
+Post Page
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Main container for the post page */
+    .post-container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+        font-family: Arial, sans-serif;
+        background-color: #ffffff; /* Added background for better contrast */
+        border-radius: 10px; /* Soft rounded corners for the post container */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+    }
+
+    /* Post title */
+    .post-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    /* Post metadata styling */
+    .post-time {
+        color: #6c757d;
+        font-size: 14px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Post body */
+    .post-body {
+        font-size: 18px;
+        line-height: 1.6;
+        color: #495057;
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Banner image styles */
+    .banner {
+        width: 100%; /* Full width to fit the container */
+        max-height: 400px; /* Limits the height for a balanced layout */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+        border-radius: 8px; /* Rounded corners to match the card style */
+        margin-bottom: 20px; /* Space between the image and the title */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    }
+
+    /* Responsive design */
+    @media (max-width: 600px) {
+        .post-title {
+            font-size: 26px;
+        }
+
+        .post-body {
+            font-size: 16px;
+        }
+    }
+
+    /* Back to list button */
+    .back-button {
+        display: inline-block;
+        margin: 20px 0;
+        padding: 10px 20px;
+        background-color: #007bff; /* Primary color */
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+        background-color: #0056b3; /* Darker shade on hover */
+    }
+</style>
+
+<div class="post-container">
+    <img class="banner" src="{{ post.banner.url }}" alt="{{ post.title }}"/>
+    <h1 class="post-title">{{ post.title }}</h1>
+    <p class="post-time">Published on {{ post.time|date:"F j, Y, g:i a" }}</p> <!-- Formatted date -->
+    <div class="post-body">
+        <p>{{ post.body }}</p>
+    </div>
+    <a class="back-button" href="{% url 'posts:list' %}">Back to Posts</a> <!-- Added back button -->
+</div>
+
+{% endblock %}

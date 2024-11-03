@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home Page
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h1>Welcome to Our Blog</h1>
+    <p>Your go-to source for insightful articles and stories.</p>
+    <a href="{% url 'posts:list' %}" class="btn">Explore Posts</a>
+</section>
+
+<section class="features">
+    <h2>Features</h2>
+    <div class="feature">
+        <i class="fas fa-pencil-alt"></i>
+        <h3>Write</h3>
+        <p>Create engaging content with our simple post editor.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-comments"></i>
+        <h3>Engage</h3>
+        <p>Interact with readers through comments and feedback.</p>
+    </div>
+    <div class="feature">
+        <i class="fas fa-share-alt"></i>
+        <h3>Share</h3>
+        <p>Spread your message across social media.</p>
+    </div>
+</section>
+
+<section class="latest-posts">
+    <h2>Latest Posts</h2>
+    <ul>
+        {% for post in latest_posts %}
+        <li>
+            <a href="{% url 'posts:page' post.slug %}">{{ post.title }}</a>
+            <p>{{ post.body|truncatewords:20 }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}

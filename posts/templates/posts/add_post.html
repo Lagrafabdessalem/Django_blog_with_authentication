@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Add Post
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Centered form container styling */
+    .form-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        font-family: Arial, sans-serif;
+    }
+
+    /* Form title styling */
+    .form-container h1 {
+        font-size: 28px;
+        text-align: center;
+        color: #333333;
+        margin-bottom: 20px;
+    }
+
+    /* Form input styling */
+    .form-with-validation input,
+    .form-with-validation select,
+    .form-with-validation textarea {
+        width: 100%;
+        padding: 12px;
+        margin: 10px 0;
+        border-radius: 6px;
+        border: 1px solid #dddddd;
+        font-size: 16px;
+        background-color: #f9f9f9;
+        transition: border-color 0.3s ease;
+    }
+
+    /* Input focus effect */
+    .form-with-validation input:focus,
+    .form-with-validation select:focus,
+    .form-with-validation textarea:focus {
+        border-color: #5a67d8; /* Soft blue focus */
+        outline: none;
+    }
+
+    /* Submit button styling */
+    .form-with-validation button[type="submit"] {
+        width: 100%;
+        padding: 12px;
+        font-size: 18px;
+        color: #ffffff;
+        background-color: #5a67d8;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    /* Button hover effect */
+    .form-with-validation button[type="submit"]:hover {
+        background-color: #434190;
+        transform: translateY(-2px);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .form-container {
+            padding: 20px;
+            margin: 20px;
+        }
+    }
+</style>
+
+<div class="form-container">
+    <h1>Add Post</h1>
+    <form class="form-with-validation" action="{% url 'posts:new-post' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

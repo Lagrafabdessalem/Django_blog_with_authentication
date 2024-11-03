@@ -1,0 +1,26 @@
+# Python files
+*.pyc
+__pycache__/
+
+# Django secret key and settings
+*.env
+.env
+.env.*
+
+# Database and migration files
+db.sqlite3
+/migrations/
+
+# Virtual environment
+venv/
+.venv/
+
+# Static and media files
+/static/
+/media/
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace

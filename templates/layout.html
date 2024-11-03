@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <title>{% block title %}Django App{% endblock %}</title>
+    <style>
+        /* Reset and Font */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Basic Styles */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1em;
+            background-color: #202020;
+            color: white;
+        }
+
+        nav .links,
+        nav .auth-links {
+            display: flex;
+            gap: 1em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #1e90ff;
+        }
+
+        .logout form {
+            display: inline;
+        }
+
+        .logout button {
+            border: none;
+            background: transparent;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .logout button:hover {
+            color: #ff6347;
+        }
+
+        /* Main content */
+        main {
+            flex: 1;
+            padding: 2em;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 1em auto;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1em;
+            background: #333;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="links">
+            <a href="/"><i class="fas fa-home"></i> Home</a>
+            <a href="/about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="{% url 'posts:list' %}"><i class="fas fa-blog"></i> Posts</a>
+        </div>
+
+        <div class="auth-links">
+            {% if user.is_authenticated %}
+            <a href="{% url 'posts:new-post' %}"><i class="fas fa-pencil-alt"></i> New Post</a>
+            <div class="logout">
+                <form action="{% url 'users:logout' %}" method="post">
+                    {% csrf_token %}
+                    <button><i class="fas fa-sign-out-alt"></i> Logout</button>
+                </form>
+            </div>
+            {% else %}
+            <a href="{% url 'users:register' %}"><i class="fas fa-user-plus"></i> Register</a>
+            <a href="{% url 'users:login' %}"><i class="fas fa-sign-in-alt"></i> Login</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer>
+        &copy; {{ current_year }} Django App. All rights reserved.
+    </footer>
+</body>
+</html>
